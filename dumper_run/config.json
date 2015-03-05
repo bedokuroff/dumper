@@ -1,0 +1,8 @@
+{
+	"dbstrings": [
+		"root@tcp(127.0.0.1:3306)/db5",
+		"root@tcp(127.0.0.1:3306)/db6"
+	],
+	"readStep": 10000,
+	"writeStep": 50000
+}

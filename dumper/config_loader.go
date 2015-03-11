@@ -2,7 +2,7 @@ package dumper
 
 import (
 	"encoding/json"
-	"fmt"
+	"log"
 	"os"
 )
 
@@ -13,12 +13,17 @@ type Configuration struct {
 }
 
 func LoadConfig(filename string) Configuration {
-	file, _ := os.Open(filename)
+	file, err := os.Open(filename)
+	if err != nil {
+		log.Fatal("Error opening the file: ", err)
+	}
+	defer file.Close()
 	decoder := json.NewDecoder(file)
 	config := Configuration{}
-	err := decoder.Decode(&config)
+	err = decoder.Decode(&config)
 	if err != nil {
-		fmt.Println("There was an error loading configuration: ", err)
+		log.Fatal("There was an error loading configuration: ", err)
 	}
+
 	return config
 }
